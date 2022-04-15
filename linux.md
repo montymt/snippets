@@ -52,6 +52,8 @@ synack重传次数: `net.ipv4.tcp_synack_retries`, 默认5次，等待秒数是�
 
 网卡溢出队列：`net.core.netdev_max_backlog`，网卡收包速率溢出时的队列长度
 
+查看网卡溢出：`cat /proc/net/softnet_stat`，每行表示一个CPU，第一列表示收包数，第二列表示弃包数，第三列表示一次软中断取包数
+
 半连接队列：`net.ipv4.tcp_max_syn_backlog`，检查：`netstat -s|grep "SYNs to LISTEN"`
 
 全连接队列：`net.core.somaxconn`，某些程序需设置应用层backlog才生效，如nginx，常用16384，取值为：`min(somaxconn, backlog)`
