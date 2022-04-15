@@ -113,16 +113,21 @@ TCP内存范围：`net.ipv4.tcp_mem`，单位为页，一页一般为4k，第一
 ```
 # 100万
 fs.file-max = 1048576
-net.ipv4.ip_local_port_range = 1024   65000
-net.core.netdev_max_backlog = 32768
+net.ipv4.ip_local_port_range = 1024 65000
+net.core.netdev_max_backlog = 16384
 net.ipv4.tcp_max_syn_backlog = 16384
 net.core.somaxconn = 16384
+net.ipv4.tcp_fastopen = 3
+net.ipv4.tcp_keepalive_time = 1800
+net.ipv4.tcp_orphan_retries = 3
+net.ipv4.tcp_fin_timeout = 30
 net.ipv4.tcp_tw_reuse = 1
-net.ipv4.tcp_max_tw_buckets = 16384
-net.ipv4.tcp_rmem = 4096 87380 16777216
-net.ipv4.tcp_wmem = 4096 87380 16777216
 net.core.rmem_max = 16777216
 net.core.wmem_max = 16777216
+net.ipv4.tcp_wmem = 4096 87380 16777216
+net.ipv4.tcp_rmem = 4096 87380 16777216
+# 512M内存
+net.ipv4.tcp_mem = 9537 12719 49152
 net.netfilter.nf_conntrack_max = 1048576
 ```
 
