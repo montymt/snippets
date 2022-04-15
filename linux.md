@@ -74,11 +74,11 @@ FIN重试次数：`net.ipv4.tcp_orphan_retries`，默认为0，重发8次。
 
 主动方收到fin报文的ack就会从FIN_WAIT1变成FIN_WAIT2，收不到ack就会重发fin报文
 
-孤儿连接最大值：`net.ipv4.tcp_max_orphans`，无法正常关闭的连接（调用close后）为孤儿连接，FIN_WAIT1过多时可以调整此值，可用16384
+孤儿连接最大值：`net.ipv4.tcp_max_orphans`，无法正常关闭的连接（调用close后）为孤儿连接，FIN_WAIT1过多时可以调整此值，默认为16384
 
 FIN_WAIT2持续时间：`net.ipv4.tcp_fin_timeout`，默认为60，对方可发送数据的时间
 
-TIME_WAIT最大值：`net.ipv4.tcp_max_tw_buckets`，需要调整到合适大小
+TIME_WAIT最大值：`net.ipv4.tcp_max_tw_buckets`，高并发可适当调大以免数据错乱，默认为16384
 
 复用TIME_WAIT：`net.ipv4.tcp_tw_reuse`，对客户端有用，需开启时间戳
 
@@ -104,6 +104,8 @@ TCP内存范围：`net.ipv4.tcp_mem`，单位为页，一页一般为4k，第一
 
 查看socket状态：`cat /proc/net/sockstat`
 
+防火墙最大跟踪连接：`net.netfilter.nf_conntrack_max`，默认为65536
+
 ## 参数优化实例
 
 ```
@@ -114,8 +116,12 @@ net.core.netdev_max_backlog = 32768
 net.ipv4.tcp_max_syn_backlog = 16384
 net.core.somaxconn = 16384
 net.ipv4.tcp_tw_reuse = 1
+net.ipv4.tcp_max_tw_buckets = 16384
 net.ipv4.tcp_rmem = 4096 87380 16777216
 net.ipv4.tcp_wmem = 4096 87380 16777216
+net.core.rmem_max = 16777216
+net.core.wmem_max = 16777216
+net.netfilter.nf_conntrack_max = 1048576
 ```
 
 ## 磁盘管理
