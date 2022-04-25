@@ -4,6 +4,7 @@
    * [Tuning](#tuning)
    * [参数优化实例](#参数优化实例)
    * [磁盘管理](#磁盘管理)
+   * [iptables](#iptables)
    * [命令行显示二维码](#命令行显示二维码)
 <!--te-->
 
@@ -165,6 +166,40 @@ lvresize /dev/mapper/vg1-lv1 /dev/vdb1
 resize2fs /dev/mapper/vg1-lv1
 ```
 
+## iptables
+
+服务管理：
+
+```shell
+yum -y install iptables-services
+service iptables save
+service iptables reload
+```
+
+常用规则：
+
+```shell
+iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A INPUT -p icmp -j ACCEPT
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
+#iptables -A INPUT -j REJECT --reject-with icmp-host-prohibited
+#iptables -A FORWARD -j REJECT --reject-with icmp-host-prohibited
+iptables -A INPUT -p tcp -m multiport --dports 80,443,21,10000-11000 -j ACCEPT
+```
+
+ipset动态规则：
+
+```shell
+ipset create ssh-allow hash:ip timeout 0
+ipset add ssh-allow 192.168.47.1 timeout 86400
+iptables -A INPUT -p tcp --dport 22 -m set --match-set ssh-allow src -j ACCEPT
+
+ipset list ssh-allow
+ipset del ssh-allow 192.168.47.1
+ipset save ssh-allow -f /root/ssh-allow.ipset
+ipset restore -f /root/ssh-allow.ipset
+```
 ## 命令行显示二维码
 
 `yum -y install qrencode`
