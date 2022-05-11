@@ -6,10 +6,10 @@
 import logging
 from logging import handlers
 
-def init_logger(log_name):
+def init_logger(log_file):
     logger_instance = logging.getLogger()
     formatter = logging.Formatter('%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s')
-    log_handler = handlers.RotatingFileHandler(log_name, maxBytes=1024 * 1024 * 50, backupCount=9,
+    log_handler = handlers.RotatingFileHandler(log_file, maxBytes=1024 * 1024 * 50, backupCount=9,
                                                encoding='utf8')
     log_handler.setFormatter(formatter)
     logger_instance.addHandler(log_handler)
@@ -30,6 +30,7 @@ https://github.com/theskumar/python-dotenv
 ```python
 from dotenv import dotenv_values
 
+# load .env
 config = dotenv_values()
 
 print(config['DB_HOST'])
@@ -49,7 +50,7 @@ connection = pymysql.connect(host='127.0.0.1', port=3306, db='blog', user='root'
 with connection.cursor() as cursor:
     sql = "INSERT INTO `article` (time, title, author, content) " \
                       "VALUES (%s, %s, %s, %s)"
-    cursor.execute(sql, (int(time.time()), row['title'], row['author'], row['content'])
+    cursor.execute(sql, (int(time.time()), row['title'], row['author'], row['content']))
 connection.commit()
 ```
 
