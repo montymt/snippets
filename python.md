@@ -1,5 +1,45 @@
+<!--ts-->
+* [python](#python)
+   * [安装python3](#安装python3)
+   * [初始化项目](#初始化项目)
+   * [logging](#logging)
+   * [dotenv](#dotenv)
+   * [MySQL](#mysql)
+   * [websocket](#websocket)
+   * [redis](#redis)
+   * [requests](#requests)
+<!--te-->
 # python
 
+## 安装python3
+
+```shell
+yum -y install centos-release-scl
+yum -y install rh-python38
+source /opt/rh/rh-python38/enable
+mkdir .pip
+cat > .pip/pip.conf <<EOF
+[global]
+index-url = https://mirrors.aliyun.com/pypi/simple/
+
+[install]
+trusted-host=mirrors.aliyun.com
+EOF
+```
+
+## 初始化项目
+
+```shell
+pip3 install virtualenv
+#pip install virtualenvwrapper
+cd /usr/local
+mkdir my-project && cd my-project
+virtualenv -p /opt/rh/rh-python38/root/usr/bin/python3 venv
+source venv/bin/active
+#deactivate
+pip install -r requirements.txt
+#pip freeze > requirements.txt
+```
 ## logging
 
 ```python
@@ -38,6 +78,10 @@ print(config['DB_HOST'])
 
 ## MySQL
 
+python 3.7+
+
+MySQL 5.7+
+
 https://github.com/PyMySQL/PyMySQL
 
 `pip3 install PyMySQL`
@@ -53,6 +97,10 @@ with connection.cursor() as cursor:
     cursor.execute(sql, (int(time.time()), row['title'], row['author'], row['content']))
 connection.commit()
 ```
+
+https://github.com/aio-libs/aiomysql
+
+`pip3 install aiomysql`
 
 ## websocket
 
@@ -85,8 +133,6 @@ asyncio.run(server())
 ```
 
 ## redis
-
-
 
 ```python
 def batch_lpop(client, key, count):
