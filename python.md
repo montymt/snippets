@@ -18,7 +18,7 @@ yum -y install centos-release-scl
 yum -y install rh-python38
 source /opt/rh/rh-python38/enable
 mkdir .pip
-cat > .pip/pip.conf <<EOF
+cat > ~/.pip/pip.conf <<EOF
 [global]
 index-url = https://mirrors.aliyun.com/pypi/simple/
 
