@@ -35,7 +35,7 @@ pip3 install virtualenv
 cd /usr/local
 mkdir my-project && cd my-project
 virtualenv -p /opt/rh/rh-python38/root/usr/bin/python3 venv
-source venv/bin/active
+source venv/bin/activate
 #deactivate
 pip install -r requirements.txt
 #pip freeze > requirements.txt
@@ -44,21 +44,26 @@ pip install -r requirements.txt
 
 ```python
 import logging
+import sys
 from logging import handlers
 
-def init_logger(log_file):
+
+def init_logger(file=None, level=None):
     logger_instance = logging.getLogger()
     formatter = logging.Formatter('%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s')
-    log_handler = handlers.RotatingFileHandler(log_file, maxBytes=1024 * 1024 * 50, backupCount=9,
-                                               encoding='utf8')
+    if file:
+        log_handler = handlers.RotatingFileHandler(file, maxBytes=1024 * 1024 * 50, backupCount=9, encoding='utf-8')
+    else:
+        log_handler = logging.StreamHandler(sys.stdout)
     log_handler.setFormatter(formatter)
     logger_instance.addHandler(log_handler)
+    if isinstance(level, str) and level in ['info', 'debug', 'error', 'warning']:
+        logger_instance.setLevel(getattr(logging, level.upper()))
     return logger_instance
 
-logger = init_logger('test.log')
+init_logger('error.log', 'info')
 
-# default level is info
-logger.warning("warning message")
+logging.info("info message")
 ```
 
 ## dotenv
@@ -150,5 +155,5 @@ def batch_lpop(client, key, count):
     return data
 ```
 
-## requests
+## requests/aiohttp
 

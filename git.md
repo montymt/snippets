@@ -76,3 +76,11 @@ git config --global --unset http.https://github.com.proxy
 同时修改提交作者：
 
 `git commit --amend --author "jack <jack@domain.com>"`
+
+## 替换历史提交内容
+
+`git filter-branch --tree-filter "find -type f -name '*.py' -exec sed -i 's/oldpassword/fakepass/' {} \;"`
+
+删除备份:
+
+`git update-ref -d refs/original/refs/heads/main`
