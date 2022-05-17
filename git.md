@@ -8,6 +8,8 @@
    * [批量回退](#批量回退)
    * [对比两个分支](#对比两个分支)
    * [修正提交](#修正提交)
+   * [替换历史提交内容](#替换历史提交内容)
+   * [删除已加入忽略清单](#删除已加入忽略清单)
 <!--te-->
 
 # git
@@ -84,3 +86,9 @@ git config --global --unset http.https://github.com.proxy
 删除备份:
 
 `git update-ref -d refs/original/refs/heads/main`
+
+重置本地仓库：`git reset --hard origin/main`
+
+## 删除已加入忽略清单
+
+`git rm -r --cached .idea`
