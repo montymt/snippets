@@ -12,7 +12,7 @@ long：`long num = 123L`
 
 float: `float f = 3.141592f`，有效位数7-8位，double为15-16位
 
-char: `char c = 'a'`
+char: `char c = 'a'`，与short一样占2字节
 
 变量需要先申明并初始化再使用
 
