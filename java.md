@@ -16,3 +16,4 @@ char: `char c = 'a'`，与short一样占2字节
 
 变量需要先申明并初始化再使用
 
+byte，short，char运算，需要int接受
