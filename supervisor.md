@@ -15,7 +15,9 @@
 `echo_supervisord_conf > /etc/supervisor/supervisord.conf`
 
 `sed -i '$a [include] \
-files = /etc/supervisor/conf.d/*.ini' /etc/supervisor/supervisord.conf`
+files = /etc/supervisor/conf.d/*.conf' /etc/supervisor/supervisord.conf`
+
+`sed -i 's#/tmp/#/var/run/#g' /etc/supervisor/supervisord.conf`
 
 ## manage
 
