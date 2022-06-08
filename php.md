@@ -14,6 +14,38 @@
 
 # php
 
+## array_map
+
+回调只有一个值，没有键，多个数组参数，回调就有多个值的参数
+
+```php
+dump(array_map(function ($val) {
+    return $val * 2;
+}, array_flip([4, 5, 6])));
+/*
+array:3 [▼
+  4 => 0
+  5 => 2
+  6 => 4
+]
+*/
+```
+## array_walk
+
+```php
+$foobar = array_flip([4, 5, 6]);
+array_walk($foobar, function (&$v, $k) {
+    $v = $v + $k;
+});
+dump($foobar);
+/*
+array:3 [▼
+  4 => 4
+  5 => 6
+  6 => 8
+]
+*/
+```
 ## increment order number
 
   `date('ymd') . sprintf('%010d', mt_rand(10000, 99999))`
