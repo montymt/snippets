@@ -5,7 +5,7 @@ chroot模式的sftp搭建
 ## 创建系统用户
 
 ```shell
-useradd sftpuser -d /nonexistent -s /sbin/nologin
+useradd sftpuser -r -d /nonexistent -s /sbin/nologin
 passwd sftpuser
 mkdir /home/sftproot
 ```
