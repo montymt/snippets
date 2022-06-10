@@ -92,3 +92,10 @@ git config --global --unset http.https://github.com.proxy
 ## 删除已加入忽略清单
 
 `git rm -r --cached .idea`
+
+## bundle打包
+
+`git bundle create app.bundle master`
+
+`git clone -b master app.bundle`
+
