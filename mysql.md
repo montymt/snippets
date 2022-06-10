@@ -147,6 +147,12 @@ group by name`
 
 `select * from a left join (select cid from e where f > 0) as b on b.cid=a.cid group by a.fid`
 
+### GROUP_CONCAT
+
+GROUP_CONCAT将多条数据合并为一条
+
+`SELECT GROUP_CONCAT(mid) FROM (SELECT MIN(id) as mid FROM user WHERE state=0 GROUP BY age,gender) user_t`
+
 ## 数据控制DCL
 
 `GRANT ALL PRIVILEGES ON *.* TO 'bloguser'@'%' IDENTIFIED BY 'mypassword'`
