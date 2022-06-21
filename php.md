@@ -7,7 +7,7 @@
    * [sign data with hmac](#sign-data-with-hmac)
    * [microsecond](#microsecond)
    * [random amount](#random-amount)
-   * [json decode](#json-decode)
+   * [json](#json-decode)
    * [jwt](#jwt)
    * [export excel](#export-excel)
 <!--te-->
@@ -102,8 +102,10 @@ array:3 [▼
   }
   ```
 
-## json decode
-
+## json
+  
+  json_encode 常用选项JSON_UNESCAPED_UNICODE（256），保留汉字；JSON_UNESCAPED_SLASHES（64），保留`/`，不加会转义路径分隔符为`\/`。合起来就是320
+  
   `json_decode(file_get_contents('php://input'), true)`
   
 ## jwt
