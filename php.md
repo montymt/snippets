@@ -7,9 +7,10 @@
    * [sign data with hmac](#sign-data-with-hmac)
    * [microsecond](#microsecond)
    * [random amount](#random-amount)
-   * [json](#json-decode)
+   * [json](#json)
    * [jwt](#jwt)
    * [export excel](#export-excel)
+   * [convert encoding](#convert-encoding)
 <!--te-->
 
 # php
@@ -165,3 +166,26 @@ array:3 [▼
   $writer = new Xlsx($spreadsheet);
   $writer->save('php://output');
   ```
+
+## convert encoding
+
+```php
+// GBK to UTF-8
+$str = "\ub1b1\uc9cf\ub9e3\uc9ee";
+// hex to bin
+$strBin = pack('H*', str_replace('\\u', '', $str));
+//or
+$strBin = hex2bin(str_replace('\\u', '', $str));
+mb_convert_encoding($strBin, 'UTF-8', 'GB18030');
+//"北上广深"
+
+// UTF-8 to Unicode
+$str = '北上广深';
+$bin = mb_convert_encoding($str, 'UCS-2', 'UTF-8');
+for ($i = 0; $i < mb_strlen($bin, 'UCS-2'); $i++) {
+    $strI = mb_substr($bin, $i, 1, 'UCS-2');
+    //mb_strwidth($strI)
+    $hex .= '\\u' . bin2hex($strI);
+}
+//"\u5317\u4e0a\u5e7f\u6df1"
+```
