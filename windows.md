@@ -1,4 +1,6 @@
-# gpedit
+# windows
+
+## install gpedit
 
 Windows 10 Home version install gpedit
 
@@ -17,3 +19,6 @@ del List.txt
 
 pause
 ```
+## exempt Edge from a loopback
+
+`CheckNetIsolation LoopbackExempt -a -n="Microsoft.MicrosoftEdge_8wekyb3d8bbwe"`
