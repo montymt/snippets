@@ -1,6 +1,7 @@
 <!--ts-->
 * [php](#php)
    * [increment order number](#increment-order-number)
+   * [multiple loops break](#multiple-loops-break)
    * [random string](#random-string)
    * [data chunk](#data-chunk)
    * [ip region](#ip-region)
@@ -14,6 +15,32 @@
 <!--te-->
 
 # php
+
+## multiple loops break
+
+break 2 结束外层循环，continue类似
+```
+$arr = [
+    'a' => [
+        'z' => '22',
+        'y' => '99',
+    ],
+    'b' => [
+        'x' => '88',
+        'w' => '33',
+    ]
+];
+
+foreach ($arr as $key => $value) {
+    foreach ($value as $k => $v) {
+        dump($v);
+        if ($v == '22') {
+            break 2;
+        }
+    }
+}
+//output 22
+```
 
 ## array_map
 
