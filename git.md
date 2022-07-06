@@ -99,3 +99,8 @@ git config --global --unset http.https://github.com.proxy
 
 `git clone -b master app.bundle`
 
+## 列出合并已修改的文件
+
+对于提交，合并到master分支的模式，列出上次合并到现在修改的文件：
+
+`git diff --name-only HEAD^`
