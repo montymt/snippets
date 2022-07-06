@@ -10,6 +10,8 @@
    * [修正提交](#修正提交)
    * [替换历史提交内容](#替换历史提交内容)
    * [删除已加入忽略清单](#删除已加入忽略清单)
+   * [bundle打包](#bundle打包)
+   * [列出合并已修改的文件](#列出合并已修改的文件)
 <!--te-->
 
 # git
@@ -104,3 +106,7 @@ git config --global --unset http.https://github.com.proxy
 对于提交，合并到master分支的模式，列出上次合并到现在修改的文件：
 
 `git diff --name-only HEAD^`
+
+显示历史记录：
+
+`git log --pretty=oneline [start-commit-id]`
