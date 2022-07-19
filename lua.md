@@ -4,7 +4,9 @@
 
 参考手册：https://www.runoob.com/manual/lua53doc/contents.html
 
-**0 为 true**
+## 基础语法
+
+0 为 true
 
 table为关联数组，索引从1开始
 
@@ -15,3 +17,7 @@ table为关联数组，索引从1开始
 Nginx API for Lua: https://github.com/openresty/lua-nginx-module#nginx-api-for-lua
 
 Directives for LuaNginxModule: https://github.com/openresty/lua-nginx-module#directives
+
+Lua CJSON：https://github.com/openresty/lua-cjson
+
+Lua cjson manual: https://www.kyne.com.au/~mark/software/lua-cjson-manual.html
