@@ -12,6 +12,7 @@
    * [替换历史提交内容](#替换历史提交内容)
    * [删除已加入忽略清单](#删除已加入忽略清单)
    * [bundle打包](#bundle打包)
+   * [patch补丁](#patch补丁)
    * [列出合并已修改的文件](#列出合并已修改的文件)
 <!--te-->
 
@@ -159,6 +160,19 @@ dev分支上开发，并提交
 `git bundle create app.bundle master`
 
 `git clone -b master app.bundle`
+
+## patch补丁
+
+```
+# diff未提交的内容
+git diff > commit1.patch
+
+# diff最近一次提交
+git diff HEAD^ > commit1.patch
+
+git apply --check commit1.patch
+git apply commit1.patch
+```
 
 ## 列出合并已修改的文件
 
