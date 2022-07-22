@@ -5,6 +5,7 @@
    * [测试SSH协议](#测试ssh协议)
    * [多账号管理](#多账号管理)
    * [proxy](#proxy)
+   * [四种合并方式](#四种合并方式)
    * [批量回退](#批量回退)
    * [对比两个分支](#对比两个分支)
    * [修正提交](#修正提交)
@@ -62,6 +63,64 @@ git config --global http.https://github.com.proxy http://127.0.0.1:1081
 # 取消
 git config --global --unset http.https://github.com.proxy
 ```
+
+## 四种合并方式
+
+想改变哪个分支，就要checkout到哪个分支上。
+
+### merge
+
+将feature1上的提交合并到main，保留所有的提交记录，commit id不变
+
+```shell
+$ git checkout main
+Switched to branch 'main'
+$ git merge feature1
+```
+
+`–no-ff`会创建新的合并提交，且保留对feature1的引用
+
+### rebase
+
+将feature1上的提交变基到main，rebase会将合入分支feature1上超前的节点在待合入分支main上重新提交一遍
+
+```shell
+$ git checkout feature1
+Switched to branch 'feature1'
+$ git rebase main
+$ git checkout main
+# fast-forward
+$ git merge feature1
+```
+
+### squash
+
+压缩提交，就是将多个提交合并成一个
+
+`git rebase -i`时，s就是压缩
+
+merge方式压缩，压缩后需要提交一次
+
+```shell
+$ git checkout main
+Switched to branch 'main'
+$ git merge --squash feature1
+Squash commit -- not updating HEAD
+Automatic merge went well; stopped before committing as requested
+$ git commit -am 'Merged and squashed the feature1 branch changes'
+```
+
+### cherry-pick
+
+适合分支内容不同，且不想合并，例如：
+
+dev分支上开发，并提交
+
+切换到beta分支，cherry-pick需要的commit到beta分支
+
+最后，合并beta和main
+
+`git cherry-pick <commit-id>`
 
 ## 批量回退
 
